@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --tf-primary:        #6C63FF; // roxo — cor principal do app
+  --tf-primary-dark:   #4B44CC; // roxo escuro — hover dos botões
+  --tf-primary-light:  #EEF0FF; // roxo claro — fundos suaves
+
+  // Cores de status — usadas em badges e alertas
+  --tf-success:        #22C55E; // verde — tarefa concluída
+  --tf-warning:        #F59E0B; // amarelo — atenção
+  --tf-danger:         #EF4444; // vermelho — erro ou urgente
+  --tf-info:           #3B82F6; // azul — informação
+
+  // Tons de cinza — estrutura e texto
+  --tf-gray-50:        #F9FAFB; // fundo da página
+  --tf-gray-100:       #F3F4F6; // fundo de cards
+  --tf-gray-200:       #E5E7EB; // bordas
+  --tf-gray-400:       #9CA3AF; // texto desabilitado
+  --tf-gray-600:       #4B5563; // texto secundário
+  --tf-gray-900:       #111827; // texto principal
+
+  // Superfícies
+  --tf-bg:             #F9FAFB; // fundo geral da página
+  --tf-surface:        #FFFFFF; // fundo de cards e modais
+
+  --tf-font:           'Inter', sans-serif;
+  --tf-text-xs:        0.75rem;   // 12px — labels pequenos
+  --tf-text-sm:        0.875rem;  // 14px — texto secundário
+  --tf-text-base:      1rem;      // 16px — texto normal
+  --tf-text-lg:        1.125rem;  // 18px — subtítulos
+  --tf-text-xl:        1.25rem;   // 20px — títulos de card
+  --tf-text-2xl:       1.5rem;    // 24px — títulos de página
+
+  --tf-space-1:        0.25rem;  // 4px
+  --tf-space-2:        0.5rem;   // 8px
+  --tf-space-3:        0.75rem;  // 12px
+  --tf-space-4:        1rem;     // 16px
+  --tf-space-6:        1.5rem;   // 24px
+  --tf-space-8:        2rem;     // 32px
+
+
+  --tf-radius-sm:      4px;
+  --tf-radius-md:      8px;
+  --tf-radius-lg:      12px;
+  --tf-radius-full:    9999px;   // círculo / pill
+
+  --tf-shadow-sm:      0 1px 3px rgba(0,0,0,0.08);
+  --tf-shadow-md:      0 4px 12px rgba(0,0,0,0.10);
+  --tf-shadow-lg:      0 8px 24px rgba(0,0,0,0.12);
+}
+
+
+*, *::before, *::after {
+  box-sizing: border-box; // padding não aumenta o tamanho do elemento
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--tf-font);
+  font-size: var(--tf-text-base);
+  color: var(--tf-gray-900);
+  background-color: var(--tf-bg);
+  -webkit-font-smoothing: antialiased; // deixa a fonte mais suave no Mac/Chrome
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
