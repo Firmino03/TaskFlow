@@ -22,4 +22,15 @@
 <div style="padding: 2rem; max-width: 300px;">
 
 <app-button [fullWidth]="true">Botão largura total</app-button>
+
+</div>
+
+<div style="display: flex; gap: 1rem; padding: 2rem; flex-wrap: wrap; align-items: center;">
+
+  <app-badge>Padrão</app-badge>
+  <app-badge variant="success" [dot]="true">Concluído</app-badge>
+  <app-badge variant="warning" [dot]="true">Em andamento</app-badge>
+  <app-badge variant="danger" [dot]="true">Urgente</app-badge>
+  <app-badge variant="info">Informação</app-badge>
+
 </div>
