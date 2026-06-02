@@ -1,0 +1,36 @@
+.card {
+  background-color: var(--tf-surface);
+  border-radius: var(--tf-radius-lg);
+  border: 1px solid var(--tf-gray-200);
+  box-shadow: var(--tf-shadow-sm);
+  overflow: hidden; 
+}
+
+.card--elevated {
+  box-shadow: var(--tf-shadow-md);
+}
+
+.card__header {
+  padding: var(--tf-space-4) var(--tf-space-6); 
+  border-bottom: 1px solid var(--tf-gray-200); 
+}
+
+.card__title {
+  font-size: var(--tf-text-xl);  
+  font-weight: 600;
+  color: var(--tf-gray-900);
+}
+
+.card__subtitle {
+  font-size: var(--tf-text-sm);  
+  color: var(--tf-gray-400);
+  margin-top: var(--tf-space-1); 
+}
+
+.card__body {
+  // sem padding por padrão, para permitir flexibilidade
+}
+
+.card__body--padded {
+  padding: var(--tf-space-6); 
+}

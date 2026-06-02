@@ -34,3 +34,21 @@
   <app-badge variant="info">Informação</app-badge>
 
 </div>
+
+<div style="display: flex; gap: 1rem; padding: 2rem; flex-wrap: wrap;">
+
+  <app-card title="Meu projeto" subtitle="3 tarefas pendentes" style="width: 300px;">
+    <p style="color: #4B5563;">Conteúdo do card vem aqui dentro via ng-content.</p>
+  </app-card>
+
+  <app-card title="Card elevado" [elevated]="true" style="width: 300px;">
+    <app-badge variant="success" [dot]="true">Concluído</app-badge>
+  </app-card>
+
+  <app-card [padded]="false" style="width: 300px;">
+    <div style="background: #6C63FF; padding: 1rem; color: white;">
+      Card sem padding — conteúdo ocupa tudo
+    </div>
+  </app-card>
+
+</div>

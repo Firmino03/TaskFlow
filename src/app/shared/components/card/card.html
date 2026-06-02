@@ -1,0 +1,13 @@
+<div [class]="classes">
+
+  <div *ngIf="title" class="card__header">
+    <h3 class="card__title">{{ title }}</h3>
+
+    <p *ngIf="subtitle" class="card__subtitle">{{ subtitle }}</p>
+  </div>
+
+  <div [class]="'card__body' + (padded ? ' card__body--padded' : '')">
+    <ng-content />
+  </div>
+
+</div>
