@@ -52,3 +52,17 @@
   </app-card>
 
 </div>
+
+<div style="padding: 2rem;">
+  <app-button (click)="openModal()">Abrir modal</app-button>
+</div>
+
+<app-modal [open]="showModal" title="Confirmar ação" (closed)="closeModal()">
+  <p style="color: #4B5563; margin-bottom: 1rem;">
+    Tem certeza que deseja continuar?
+  </p>
+  <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+    <app-button variant="secondary" (click)="closeModal()">Cancelar</app-button>
+    <app-button variant="danger" (click)="closeModal()">Confirmar</app-button>
+  </div>
+</app-modal>
