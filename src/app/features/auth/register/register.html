@@ -1,1 +1,79 @@
-<p>register works!</p>
+<div class="register-page">
+  <div class="register-card">
+
+    <div class="register-header">
+      <h1 class="register-title">TaskFlow</h1>
+      <p class="register-subtitle">Crie sua conta</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label class="form-label">Nome</label>
+        <input
+          class="form-input"
+          type="text"
+          placeholder="Seu nome completo"
+          formControlName="name"
+        />
+        <span
+          class="form-error"
+          *ngIf="f['name'].invalid && f['name'].touched"
+        >
+          Nome deve ter pelo menos 3 caracteres
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input
+          class="form-input"
+          type="email"
+          placeholder="seu@email.com"
+          formControlName="email"
+        />
+        <span
+          class="form-error"
+          *ngIf="f['email'].invalid && f['email'].touched"
+        >
+          Email inválido
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Senha</label>
+        <input
+          class="form-input"
+          type="password"
+          placeholder="••••••••"
+          formControlName="password"
+        />
+        <span
+          class="form-error"
+          *ngIf="f['password'].invalid && f['password'].touched"
+        >
+          Senha deve ter pelo menos 6 caracteres
+        </span>
+      </div>
+
+      <div class="form-alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <app-button
+        type="submit"
+        [fullWidth]="true"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Criando conta...' : 'Criar conta' }}
+      </app-button>
+
+    </form>
+
+    <p class="register-footer">
+      Já tem conta?
+      <a routerLink="/login">Entrar</a>
+    </p>
+
+  </div>
+</div>
