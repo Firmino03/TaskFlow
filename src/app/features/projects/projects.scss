@@ -1,0 +1,35 @@
+.projects-page {
+  min-height: 100vh;
+  background-color: var(--tf-bg);
+}
+
+.projects-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--tf-space-4) var(--tf-space-8);
+  background-color: var(--tf-surface);
+  border-bottom: 1px solid var(--tf-gray-200);
+  box-shadow: var(--tf-shadow-sm);
+}
+
+.projects-title {
+  font-size: var(--tf-text-xl);
+  font-weight: 700;
+  color: var(--tf-primary);
+}
+
+.projects-main {
+  padding: var(--tf-space-8);
+
+  h2 {
+    font-size: var(--tf-text-2xl);
+    font-weight: 600;
+    color: var(--tf-gray-900);
+    margin-bottom: var(--tf-space-4);
+  }
+
+  p {
+    color: var(--tf-gray-600);
+  }
+}

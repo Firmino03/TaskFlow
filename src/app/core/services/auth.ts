@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 import { User, LoginCredentials, RegisterData, AuthResponse } from '../models/user.model';
 
 @Injectable({
@@ -18,10 +18,24 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: LoginCredentials): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      tap((response) => {
+      login(credentials: LoginCredentials): Observable<AuthResponse> {
+      return this.http.get<User[]>(
+      `${this.apiUrl}/users?email=${credentials.email}`
+      ).pipe(
+      map(users => {
+      const user = users[0];
+
+      if (!user || (user as any).password !== credentials.password) {
+        throw new Error('Credenciais inválidas');
+      }
+
+      const response: AuthResponse = {
+        user: { id: user.id, name: user.name, email: user.email },
+        token: `fake-jwt-token-${user.id}`
+      };
+
         this.setSession(response);
+        return response;
       })
     );
   }

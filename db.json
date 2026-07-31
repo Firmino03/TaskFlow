@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Karol Firmino",
+      "email": "karol@taskflow.com",
+      "password": "123456"
+    }
+  ],
+  "projects": [],
+  "tasks": []
+}
