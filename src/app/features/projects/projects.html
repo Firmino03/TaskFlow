@@ -1,11 +1,91 @@
 <div class="projects-page">
+
   <header class="projects-header">
     <h1 class="projects-title">TaskFlow</h1>
-    <app-button variant="ghost" (click)="logout()">Sair</app-button>
+    <div class="projects-header__actions">
+      <app-button variant="primary" (click)="showCreateModal = true">
+        + Novo projeto
+      </app-button>
+      <app-button variant="ghost" (click)="logout()">Sair</app-button>
+    </div>
   </header>
 
   <main class="projects-main">
-    <h2>Meus Projetos</h2>
-    <p>Em breve os projetos aparecerão aqui.</p>
+    <div class="projects-top">
+      <h2>Meus projetos</h2>
+      <span class="projects-count">{{ projects.length }} projetos</span>
+    </div>
+
+    <!-- loading state -->
+    <div *ngIf="loading" class="projects-loading">
+      Carregando projetos...
+    </div>
+
+    <!-- lista vazia -->
+    <div *ngIf="!loading && projects.length === 0" class="projects-empty">
+      <p>Nenhum projeto ainda.</p>
+      <app-button (click)="showCreateModal = true">Criar primeiro projeto</app-button>
+    </div>
+
+    <!-- grid de projetos -->
+    <div *ngIf="!loading && projects.length > 0" class="projects-grid">
+      <app-card *ngFor="let project of projects" [title]="project.name">
+        <div class="project-card-body">
+          <p class="project-description">{{ project.description }}</p>
+          <div class="project-card-footer">
+            <app-badge [variant]="getStatusVariant(project.status)" [dot]="true">
+              {{ getStatusLabel(project.status) }}
+            </app-badge>
+            <app-button
+              variant="danger"
+              size="sm"
+              (click)="onDeleteProject(project.id)">
+              Deletar
+            </app-button>
+          </div>
+        </div>
+      </app-card>
+    </div>
   </main>
+
 </div>
+
+<!-- modal de criar projeto -->
+<app-modal
+  [open]="showCreateModal"
+  title="Novo projeto"
+  (closed)="showCreateModal = false">
+
+  <form [formGroup]="createForm" (ngSubmit)="onCreateProject()">
+
+    <div class="form-group">
+      <label class="form-label">Nome do projeto</label>
+      <input class="form-input" type="text" formControlName="name" placeholder="Ex: TaskFlow App" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Descrição</label>
+      <textarea class="form-input form-textarea" formControlName="description" placeholder="Descreva o projeto..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Status</label>
+      <select class="form-input" formControlName="status">
+        <option value="active">Em andamento</option>
+        <option value="paused">Pausado</option>
+        <option value="done">Concluído</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <app-button variant="secondary" type="button" (click)="showCreateModal = false">
+        Cancelar
+      </app-button>
+      <app-button variant="primary" type="submit" [disabled]="createForm.invalid">
+        Criar projeto
+      </app-button>
+    </div>
+
+  </form>
+
+</app-modal>
