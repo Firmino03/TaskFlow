@@ -1,12 +1,21 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Karol Firmino",
       "email": "karol@taskflow.com",
       "password": "123456"
     }
   ],
-  "projects": [],
-  "tasks": []
+  "projects": [
+    {
+      "name": "Projeto 1",
+      "description": "Primeira criação de projeto",
+      "status": "active",
+      "createdAt": "2026-10-09T12:24:28.864Z",
+      "id": "-l6pgVxMpa4"
+    }
+  ],
+  "tasks": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
