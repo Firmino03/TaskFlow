@@ -1,0 +1,221 @@
+.board-page {
+  min-height: 100vh;
+  background-color: var(--tf-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--tf-space-4) var(--tf-space-8);
+  background-color: var(--tf-surface);
+  border-bottom: 1px solid var(--tf-gray-200);
+  box-shadow: var(--tf-shadow-sm);
+}
+
+.board-header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--tf-space-4);
+}
+
+.board-title {
+  font-size: var(--tf-text-xl);
+  font-weight: 600;
+  color: var(--tf-gray-900);
+}
+
+.board-main {
+  flex: 1;
+  padding: var(--tf-space-6);
+  overflow-x: auto; // permite scroll horizontal quando há muitas colunas
+}
+
+.board-loading {
+  text-align: center;
+  padding: var(--tf-space-8);
+  color: var(--tf-gray-400);
+}
+
+.board-columns {
+  display: flex;
+  gap: var(--tf-space-4);
+  align-items: flex-start;
+  min-height: calc(100vh - 140px);
+}
+
+.board-column {
+  flex: 1;
+  min-width: 280px;
+  background-color: var(--tf-gray-100);
+  border-radius: var(--tf-radius-lg);
+  padding: var(--tf-space-4);
+
+  // cor da borda superior muda por coluna
+  border-top: 3px solid var(--tf-gray-400);
+
+  &--progress {
+    border-top-color: var(--tf-warning);
+  }
+
+  &--done {
+    border-top-color: var(--tf-success);
+  }
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--tf-space-4);
+}
+
+.column-title {
+  font-size: var(--tf-text-sm);
+  font-weight: 600;
+  color: var(--tf-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.column-count {
+  background-color: var(--tf-gray-200);
+  color: var(--tf-gray-600);
+  font-size: var(--tf-text-xs);
+  font-weight: 600;
+  padding: 2px var(--tf-space-2);
+  border-radius: var(--tf-radius-full);
+  min-width: 20px;
+  text-align: center;
+}
+
+.column-body {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tf-space-3);
+}
+
+.column-empty {
+  text-align: center;
+  padding: var(--tf-space-6);
+  color: var(--tf-gray-400);
+  font-size: var(--tf-text-sm);
+  border: 2px dashed var(--tf-gray-200);
+  border-radius: var(--tf-radius-md);
+}
+
+.task-card {
+  background-color: var(--tf-surface);
+  border-radius: var(--tf-radius-md);
+  border: 1px solid var(--tf-gray-200);
+  padding: var(--tf-space-4);
+  box-shadow: var(--tf-shadow-sm);
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--tf-shadow-md);
+  }
+
+  // estilo quando está sendo arrastado
+  &.cdk-drag-dragging {
+    box-shadow: var(--tf-shadow-lg);
+    cursor: grabbing;
+    opacity: 0.9;
+  }
+
+  // tarefa concluída fica levemente apagada
+  &--done {
+    opacity: 0.7;
+  }
+}
+
+// placeholder que aparece enquanto a tarefa é arrastada
+.cdk-drag-placeholder {
+  background-color: var(--tf-primary-light);
+  border: 2px dashed var(--tf-primary);
+  border-radius: var(--tf-radius-md);
+  height: 80px;
+}
+
+// animação de entrada quando a tarefa é solta
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// animação das outras tarefas quando uma é arrastada
+.column-body.cdk-drop-list-dragging .task-card:not(.cdk-drag-dragging) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.task-card__title {
+  font-size: var(--tf-text-sm);
+  font-weight: 600;
+  color: var(--tf-gray-900);
+  margin-bottom: var(--tf-space-2);
+}
+
+.task-card__desc {
+  font-size: var(--tf-text-xs);
+  color: var(--tf-gray-600);
+  margin-bottom: var(--tf-space-3);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;    // limita a 2 linhas
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// FORMULÁRIO DO MODAL
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tf-space-2);
+  margin-bottom: var(--tf-space-4);
+}
+
+.form-label {
+  font-size: var(--tf-text-sm);
+  font-weight: 500;
+  color: var(--tf-gray-600);
+}
+
+.form-input {
+  height: 44px;
+  padding: 0 var(--tf-space-4);
+  border: 1.5px solid var(--tf-gray-200);
+  border-radius: var(--tf-radius-md);
+  font-size: var(--tf-text-sm);
+  font-family: var(--tf-font);
+  color: var(--tf-gray-900);
+  background-color: var(--tf-surface);
+  transition: border-color 0.2s ease;
+  outline: none;
+
+  &:focus {
+    border-color: var(--tf-primary);
+  }
+}
+
+.form-textarea {
+  height: 100px;
+  padding: var(--tf-space-3) var(--tf-space-4);
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--tf-space-2);
+  margin-top: var(--tf-space-4);
+}
