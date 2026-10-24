@@ -16,6 +16,7 @@ import { ModalComponent } from '../../shared/components/modal/modal';
   imports: [CommonModule, ReactiveFormsModule, ButtonComponent, CardComponent, BadgeComponent, ModalComponent],
   templateUrl: './projects.html',
   styleUrl: './projects.scss'
+  
 })
 export class ProjectsComponent implements OnInit {
 
@@ -26,8 +27,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private projectService: ProjectService,
-    private router: Router,
+    public projectService: ProjectService,
+    public router: Router,
     private fb: FormBuilder
   ) {
     this.createForm = this.fb.group({
@@ -101,4 +102,6 @@ export class ProjectsComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  
 }
