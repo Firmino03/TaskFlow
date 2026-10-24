@@ -29,8 +29,13 @@
 
     <!-- grid de projetos -->
     <div *ngIf="!loading && projects.length > 0" class="projects-grid">
-      <app-card *ngFor="let project of projects" [title]="project.name">
-        <div class="project-card-body">
+        <app-card
+          *ngFor="let project of projects"
+          [title]="project.name"
+          style="cursor: pointer"
+          (click)="router.navigate(['/board', project.id])">
+          <div class="project-card-body">
+            
           <p class="project-description">{{ project.description }}</p>
           <div class="project-card-footer">
             <app-badge [variant]="getStatusVariant(project.status)" [dot]="true">
