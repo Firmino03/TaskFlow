@@ -1,59 +1,88 @@
-# TaskflowApp
+# TaskFlow
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12.
+Plataforma de gestão de projetos estilo Jira, construída do zero em Angular 21.
 
-## Development server
+## Stack e tecnologias
 
-To start a local development server, run:
+| Tecnologia | Versão | Como é usada |
+| --- | --- | --- |
+| Angular | 21 | Framework principal — componentes, roteamento, formulários reativos |
+| TypeScript | 5 | Tipagem estática — interfaces, generics, decoradores |
+| RxJS | 7 | Estado reativo — BehaviorSubject, Observables, operadores tap e map |
+| SCSS | — | Estilização — Design System com variáveis CSS customizadas |
+| Angular CDK | — | Drag and drop nativo no board Kanban |
+| json-server | 1 | API REST simulada — banco de dados local em JSON |
+| Jest | — | Testes unitários — services, guards e componentes |
+| Docker | — | Containerização — Dockerfile + docker-compose |
 
+## Arquitetura
+
+```
+Browser (Páginas)
+├── Auth (Login · Registro)
+├── Projects (CRUD de projetos)
+├── Board (Kanban drag-drop)
+└── Dashboard (Métricas)
+        ↓
+Angular Core
+├── AuthGuard      → protege rotas privadas
+├── Interceptor    → injeta JWT em toda requisição
+├── Shared         → Design System reutilizável
+└── Router         → rotas + guards
+        ↓
+Services + RxJS
+├── AuthService    → BehaviorSubject + estado do usuário
+├── ProjectService → HTTP + Observable
+├── TaskService    → CRUD de tarefas
+└── Models         → interfaces TypeScript
+        ↓
+Infraestrutura
+└── json-server · Docker + docker-compose · Environments (dev / prod)
+```
+
+## Funcionalidades
+
+- Autenticação completa com login, registro, JWT e proteção de rotas via AuthGuard
+- CRUD de projetos — criar, listar e deletar projetos com status (em andamento, pausado, concluído)
+- Board Kanban com drag and drop entre colunas (A fazer, Em andamento, Concluído) usando Angular CDK
+- Dashboard com métricas de projetos e tarefas
+- Design System próprio com Button, Badge, Card e Modal reutilizáveis
+- Formulários reativos com validação em tempo real
+- HTTP Interceptor que injeta o token JWT automaticamente em todas as requisições
+- Responsividade para desktop e mobile
+
+## Como rodar localmente
+
+**Pré-requisitos:** Node.js 20+, npm, Docker (opcional)
+
+**1. Clone o repositório**
+```bash
+git clone https://github.com/Firmino03/TaskFlow.git
+cd TaskFlow
+```
+
+**2. Instale as dependências**
+```bash
+npm install
+```
+
+**3. Suba a API simulada (terminal 1)**
+```bash
+npm run api
+```
+
+**4. Rode o Angular (terminal 2)**
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**5. Acesse** `http://localhost:4200`
 
-## Code scaffolding
+Usuário padrão:
+- Email: `karol@taskflow.com`
+- Senha: `123456`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+**Com Docker:**
 ```bash
-ng generate component component-name
+docker-compose up
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
