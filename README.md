@@ -6,7 +6,7 @@ Plataforma de gestão de projetos estilo Jira, construída do zero em Angular 21
 
 | Tecnologia | Versão | Como é usada |
 | --- | --- | --- |
-| Angular | 21 | Framework principal — componentes, roteamento, formulários reativos |
+| Angular | 22 | Framework principal — componentes, roteamento, formulários reativos |
 | TypeScript | 5 | Tipagem estática — interfaces, generics, decoradores |
 | RxJS | 7 | Estado reativo — BehaviorSubject, Observables, operadores tap e map |
 | SCSS | — | Estilização — Design System com variáveis CSS customizadas |
@@ -17,28 +17,8 @@ Plataforma de gestão de projetos estilo Jira, construída do zero em Angular 21
 
 ## Arquitetura
 
-```
-Browser (Páginas)
-├── Auth (Login · Registro)
-├── Projects (CRUD de projetos)
-├── Board (Kanban drag-drop)
-└── Dashboard (Métricas)
-        ↓
-Angular Core
-├── AuthGuard      → protege rotas privadas
-├── Interceptor    → injeta JWT em toda requisição
-├── Shared         → Design System reutilizável
-└── Router         → rotas + guards
-        ↓
-Services + RxJS
-├── AuthService    → BehaviorSubject + estado do usuário
-├── ProjectService → HTTP + Observable
-├── TaskService    → CRUD de tarefas
-└── Models         → interfaces TypeScript
-        ↓
-Infraestrutura
-└── json-server · Docker + docker-compose · Environments (dev / prod)
-```
+<img width="863" height="547" alt="image" src="https://github.com/user-attachments/assets/71313be4-e7b5-4346-b690-7a8577a9473c" />
+
 
 ## Funcionalidades
 
