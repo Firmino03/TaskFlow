@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from '../../core/services/task';
@@ -12,13 +12,14 @@ import { ModalComponent } from '../../shared/components/modal/modal';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DragDropModule, ButtonComponent, BadgeComponent, ModalComponent, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, DragDropModule, ButtonComponent, BadgeComponent, ModalComponent],
   templateUrl: './board.html',
   styleUrl: './board.scss'
 })
 export class BoardComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
 
-  projectId!: number;
+  projectId!: string;
   loading = false;
   showCreateModal = false;
   createForm: FormGroup;
@@ -44,8 +45,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     // ActivatedRoute lê os parâmetros da URL
-    // quando a rota for /board/1, projectId = 1
-    this.projectId = Number(this.route.snapshot.paramMap.get('id'));
+    this.projectId = this.route.snapshot.paramMap.get('id')!;
     this.loadTasks();
   }
 
@@ -58,16 +58,18 @@ export class BoardComponent implements OnInit {
         this.inProgressTasks = tasks.filter(t => t.status === 'in-progress');
         this.doneTasks = tasks.filter(t => t.status === 'done');
         this.loading = false;
+        this.cdr.markForCheck();
       },
-      error: () => this.loading = false
+      error: () => {
+        this.loading = false;
+        this.cdr.markForCheck();
+      }
     });
   }
 
   // esse método é chamado pelo Angular CDK quando
   // o usuário solta uma tarefa em uma nova posição
   onTaskDrop(event: CdkDragDrop<Task[]>): void {
-
-    // se soltou na mesma coluna, só reordena
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -77,7 +79,6 @@ export class BoardComponent implements OnInit {
       return;
     }
 
-    // se mudou de coluna, move o item entre arrays
     transferArrayItem(
       event.previousContainer.data,
       event.container.data,
@@ -121,7 +122,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  onDeleteTask(id: number, status: string): void {
+  onDeleteTask(id: string, status: string): void {
     if (!confirm('Deletar esta tarefa?')) return;
     this.taskService.deleteTask(id).subscribe({
       next: () => this.loadTasks()
