@@ -1,6 +1,6 @@
 export interface Task {
-  id: number;
-  projectId: number;
+  id: string;
+  projectId: string;
   title: string;
   description: string;
   status: 'todo' | 'in-progress' | 'done';
@@ -9,10 +9,18 @@ export interface Task {
 }
 
 export interface CreateTaskData {
-  projectId: number;
+  projectId: string;
   title: string;
   description: string;
   status: 'todo' | 'in-progress' | 'done';
   priority: 'low' | 'medium' | 'high';
   createdAt: string;
+}
+
+export interface UpdateTaskData {
+  title?: string;
+  description?: string;
+  status?: 'todo' | 'in-progress' | 'done';
+  priority?: 'low' | 'medium' | 'high';
+  createdAt?: string;
 }
