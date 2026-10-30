@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login';
 import { RegisterComponent } from './features/auth/register/register';
 import { ProjectsComponent } from './features/projects/projects';
+import { BoardComponent } from './features/board/board';
 import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
@@ -9,4 +10,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'projects', canActivate: [authGuard], component: ProjectsComponent },
+  { path: 'board/:id', canActivate: [authGuard], component: BoardComponent },
 ];
