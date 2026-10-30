@@ -15,8 +15,8 @@ export class TaskService {
 
   // busca todas as tarefas de um projeto específico
   // o ?projectId= filtra direto na API do json-server
-  getTasksByProject(projectId: number): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.apiUrl}?projectId=${projectId}`);
+  getTasksByProject(projectId: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}?projectId=${encodeURIComponent(projectId)}`);
   }
 
   createTask(data: CreateTaskData): Observable<Task> {
@@ -25,11 +25,11 @@ export class TaskService {
 
   // Partial<Task> permite atualizar só o campo status
   // sem precisar mandar o objeto inteiro
-  updateTask(id: number, data: Partial<Task>): Observable<Task> {
+  updateTask(id: string, data: Partial<Task>): Observable<Task> {
     return this.http.patch<Task>(`${this.apiUrl}/${id}`, data);
   }
 
-  deleteTask(id: number): Observable<void> {
+  deleteTask(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
