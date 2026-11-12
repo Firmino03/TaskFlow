@@ -7,7 +7,7 @@
       </app-button>
       <h1 class="board-title">Board</h1>
     </div>
-    <app-button variant="primary" (click)="showCreateModal = true">
+    <app-button variant="primary" (click)="openCreateModal()">
       + Nova tarefa
     </app-button>
   </header>
@@ -61,12 +61,20 @@
               <app-badge [variant]="getPriorityVariant(task.priority)">
                 {{ getPriorityLabel(task.priority) }}
               </app-badge>
-              <app-button
-                variant="ghost"
-                size="sm"
-                (click)="onDeleteTask(task.id, task.status)">
-                ✕
-              </app-button>
+              <div class="task-card__actions">
+                <app-button
+                  variant="ghost"
+                  size="sm"
+                  (click)="openEditModal(task)">
+                  ✎
+                </app-button>
+                <app-button
+                  variant="ghost"
+                  size="sm"
+                  (click)="onDeleteTask(task.id, task.status)">
+                  ✕
+                </app-button>
+              </div>
             </div>
           </div>
 
@@ -98,12 +106,20 @@
               <app-badge [variant]="getPriorityVariant(task.priority)">
                 {{ getPriorityLabel(task.priority) }}
               </app-badge>
-              <app-button
-                variant="ghost"
-                size="sm"
-                (click)="onDeleteTask(task.id, task.status)">
-                ✕
-              </app-button>
+              <div class="task-card__actions">
+                <app-button
+                  variant="ghost"
+                  size="sm"
+                  (click)="openEditModal(task)">
+                  ✎
+                </app-button>
+                <app-button
+                  variant="ghost"
+                  size="sm"
+                  (click)="onDeleteTask(task.id, task.status)">
+                  ✕
+                </app-button>
+              </div>
             </div>
           </div>
           <div *ngIf="inProgressTasks.length === 0" class="column-empty">
@@ -132,12 +148,20 @@
             <div class="task-card__desc">{{ task.description }}</div>
             <div class="task-card__footer">
               <app-badge variant="success">Concluído</app-badge>
-              <app-button
-                variant="ghost"
-                size="sm"
-                (click)="onDeleteTask(task.id, task.status)">
-                ✕
-              </app-button>
+              <div class="task-card__actions">
+                <app-button
+                  variant="ghost"
+                  size="sm"
+                  (click)="openEditModal(task)">
+                  ✎
+                </app-button>
+                <app-button
+                  variant="ghost"
+                  size="sm"
+                  (click)="onDeleteTask(task.id, task.status)">
+                  ✕
+                </app-button>
+              </div>
             </div>
           </div>
           <div *ngIf="doneTasks.length === 0" class="column-empty">
@@ -151,13 +175,13 @@
 
 </div>
 
-<!-- modal de criar tarefa -->
+<!-- modal de criar/editar tarefa (o mesmo componente para os dois modos) -->
 <app-modal
-  [open]="showCreateModal"
-  title="Nova tarefa"
-  (closed)="showCreateModal = false">
+  [open]="showTaskModal"
+  [title]="isEditing ? 'Editar tarefa' : 'Nova tarefa'"
+  (closed)="closeTaskModal()">
 
-  <form [formGroup]="createForm" (ngSubmit)="onCreateTask()">
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmitTask()">
 
     <div class="form-group">
       <label class="form-label">Título</label>
@@ -186,11 +210,11 @@
     </div>
 
     <div class="modal-actions">
-      <app-button variant="secondary" type="button" (click)="showCreateModal = false">
+      <app-button variant="secondary" type="button" (click)="closeTaskModal()">
         Cancelar
       </app-button>
-      <app-button variant="primary" type="submit" [disabled]="createForm.invalid">
-        Criar tarefa
+      <app-button variant="primary" type="submit" [disabled]="taskForm.invalid">
+        {{ isEditing ? 'Salvar alterações' : 'Criar tarefa' }}
       </app-button>
     </div>
 
