@@ -21,8 +21,10 @@ export class BoardComponent implements OnInit {
 
   projectId!: string;
   loading = false;
-  showCreateModal = false;
-  createForm: FormGroup;
+  showTaskModal = false;
+  // null = modo "criar"; com tarefa = modo "editar"
+  editingTask: Task | null = null;
+  taskForm: FormGroup;
 
   // cada coluna tem sua própria lista de tarefas
   // o CDK drag-drop trabalha com arrays separados
@@ -36,7 +38,7 @@ export class BoardComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.createForm = this.fb.group({
+    this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', Validators.required],
       priority: ['medium']
@@ -103,11 +105,45 @@ export class BoardComponent implements OnInit {
     return map[id] ?? 'todo';
   }
 
-  onCreateTask(): void {
-    if (this.createForm.invalid) return;
+  get isEditing(): boolean {
+    return this.editingTask !== null;
+  }
 
+  openCreateModal(): void {
+    this.editingTask = null;
+    this.taskForm.reset({ title: '', description: '', priority: 'medium' });
+    this.showTaskModal = true;
+  }
+
+  // abre o mesmo modal, mas com os dados da tarefa preenchidos
+  openEditModal(task: Task): void {
+    this.editingTask = task;
+    this.taskForm.reset({
+      title: task.title,
+      description: task.description,
+      priority: task.priority
+    });
+    this.showTaskModal = true;
+  }
+
+  closeTaskModal(): void {
+    this.showTaskModal = false;
+    this.editingTask = null;
+  }
+
+  onSubmitTask(): void {
+    if (this.taskForm.invalid) return;
+
+    if (this.editingTask) {
+      this.updateTask(this.editingTask);
+    } else {
+      this.createTask();
+    }
+  }
+
+  private createTask(): void {
     const data = {
-      ...this.createForm.value,
+      ...this.taskForm.value,
       projectId: this.projectId,
       status: 'todo' as const,
       createdAt: new Date().toISOString()
@@ -115,9 +151,24 @@ export class BoardComponent implements OnInit {
 
     this.taskService.createTask(data).subscribe({
       next: () => {
-        this.showCreateModal = false;
-        this.createForm.reset({ priority: 'medium' });
+        this.closeTaskModal();
         this.loadTasks();
+      }
+    });
+  }
+
+  private updateTask(task: Task): void {
+    // só os campos editáveis; status e projectId não mudam aqui
+    const { title, description, priority } = this.taskForm.value;
+    const changes = { title, description, priority };
+
+    this.taskService.updateTask(task.id, changes).subscribe({
+      next: () => {
+        // atualiza o objeto que já está na tela:
+        // sem recarregar a lista, o card não "pisca" nem muda de lugar
+        Object.assign(task, changes);
+        this.closeTaskModal();
+        this.cdr.markForCheck();
       }
     });
   }
