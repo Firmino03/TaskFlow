@@ -58,10 +58,6 @@ ng serve
 
 **5. Acesse** `http://localhost:4200`
 
-Usuário padrão:
-- Email: `karol@taskflow.com`
-- Senha: `123456`
-
 **Com Docker:**
 ```bash
 docker-compose up
