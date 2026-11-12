@@ -30,6 +30,7 @@
 - Formulários reativos com validação em tempo real
 - HTTP Interceptor que injeta o token JWT automaticamente em todas as requisições
 - Responsividade para desktop e mobile
+<img width="2560" height="1640" alt="Notebook – Tela de projetos@2x" src="https://github.com/user-attachments/assets/abf20007-650d-4179-af66-40beab2801bc" />
 
 ## Como rodar localmente
 
