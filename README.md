@@ -1,6 +1,6 @@
-# TaskFlow
+<img width="800" height="300" alt="taskflow-logo-fundo-branco" src="https://github.com/user-attachments/assets/54455126-6bd9-4bc7-bd97-1b8871ea3010" />
 
-Plataforma de gestão de projetos estilo Jira, construída do zero em Angular 21.
+# Plataforma de gestão de projetos estilo Jira, construída do zero em Angular 21.
 
 ## Stack e tecnologias
 
