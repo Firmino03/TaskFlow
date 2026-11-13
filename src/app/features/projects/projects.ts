@@ -9,11 +9,12 @@ import { ButtonComponent } from '../../shared/components/button/button';
 import { CardComponent } from '../../shared/components/card/card';
 import { BadgeComponent } from '../../shared/components/badge/badge';
 import { ModalComponent } from '../../shared/components/modal/modal';
+import { LogoComponent } from '../../shared/components/logo/logo';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, CardComponent, BadgeComponent, ModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, CardComponent, BadgeComponent, ModalComponent, LogoComponent],
   templateUrl: './projects.html',
   styleUrl: './projects.scss'
   
