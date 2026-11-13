@@ -16,6 +16,25 @@
       "id": "-l6pgVxMpa4"
     }
   ],
-  "tasks": [],
-  "$schema": ["./node_modules/json-server/schema.json"]
+  "tasks": [
+    {
+      "title": "Aplicação de logo",
+      "description": "Remova o favicon antigo e adicione novos ícones do Taskflow em formato SVG para obter melhor escalabilidade e consistência no design.",
+      "priority": "medium",
+      "projectId": "-l6pgVxMpa4",
+      "status": "in-progress",
+      "createdAt": "2026-11-13T14:16:20.697Z",
+      "id": "CwXLX-grNRw"
+    },
+    {
+      "title": "Leyout",
+      "description": " Corrigir o título da aplicação e remover atributo de tema no HTML",
+      "priority": "medium",
+      "projectId": "-l6pgVxMpa4",
+      "status": "todo",
+      "createdAt": "2026-11-13T14:17:19.204Z",
+      "id": "_4PB62r3lxo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
