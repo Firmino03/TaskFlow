@@ -1,0 +1,13 @@
+<!--
+  <picture> troca a imagem sozinho conforme o tema do sistema:
+  no escuro usa a versão com texto branco e azul claro.
+  O ícone é igual nos dois temas, por isso não precisa de <source>.
+-->
+@if (variant === 'full') {
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="taskflow-logo-dark.svg" />
+    <img src="taskflow-logo.svg" alt="TaskFlow" [attr.height]="height" />
+  </picture>
+} @else {
+  <img src="taskflow-icon.svg" alt="TaskFlow" [attr.height]="height" />
+}
