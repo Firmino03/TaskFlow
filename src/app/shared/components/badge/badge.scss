@@ -15,23 +15,23 @@
 }
 
 .badge--success {
-  background-color: #DCFCE7; 
-  color: #15803D;             
+  background-color: var(--success-subtle); 
+  color: var(--success-ink);             
 }
 
 .badge--warning {
-  background-color: #FEF9C3; 
-  color: #A16207;             
+  background-color: var(--accent-subtle); 
+  color: var(--accent-ink);             
 }
 
 .badge--danger {
-  background-color: #FEE2E2; 
-  color: #B91C1C;            
+  background-color: var(--danger-subtle); 
+  color: var(--danger-ink);            
 }
 
 .badge--info {
-  background-color: #DBEAFE; 
-  color: #1D4ED8;             
+  background-color: var(--primary-subtle); 
+  color: var(--link);             
 }
 
 .badge__dot {
