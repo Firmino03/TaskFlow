@@ -23,7 +23,7 @@
 
 .btn--primary {
   background-color: var(--tf-primary);
-  color: #FFFFFF;
+  color: var(--on-primary);
 
   &:hover {
     background-color: var(--tf-primary-dark); 
@@ -42,10 +42,10 @@
 
 .btn--danger {
   background-color: var(--tf-danger);
-  color: #FFFFFF;
+  color: var(--on-danger);
 
   &:hover {
-    background-color: #DC2626; 
+    filter: brightness(0.9);
   }
 }
 
