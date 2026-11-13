@@ -75,8 +75,8 @@
 }
 
 .form-alert {
-  background-color: #FEE2E2;
-  color: #B91C1C;
+  background-color: var(--danger-subtle);
+  color: var(--danger-ink);
   font-size: var(--tf-text-sm);
   padding: var(--tf-space-3) var(--tf-space-4);
   border-radius: var(--tf-radius-md);
